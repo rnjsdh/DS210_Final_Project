@@ -89,5 +89,59 @@ fn main() {
     let graph = load_graph_from_csv("netflix_titles.csv");
 
     println!("Graph loaded with {} movies.", graph.nodes.len());
+    
+    if let Some((title1, title2, similarity)) = graph.get_most_similar() {
+        println!(
+            "The most similar movies are '{}' and '{}' with a similarity score of {}.",
+            title1, title2, similarity
+        );
+    } else {
+        println!("No similar movies found.");
+    }
+
+    if let Some((title1, title2, dissimilarity)) = graph.get_most_dissimilar() {
+        println!(
+            "The most dissimilar movies are '{}' and '{}' with a dissimilarity score of {}.",
+            title1, title2, dissimilarity
+        );
+    } else {
+        println!("No dissimilar movies found.");
+    }
 }
 
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_get_most_similar() {
+        let mut graph = Graph::new();
+        graph.add_movie("Movie 1", vec!["Actor 1".to_string(), "Actor 2".to_string()]);
+        graph.add_movie("Movie 2", vec!["Actor 2".to_string(), "Actor 3".to_string()]);
+        graph.add_movie("Movie 3", vec!["Actor 4".to_string(), "Actor 5".to_string()]);
+
+        if let Some((title1, title2, similarity)) = graph.get_most_similar() {
+            assert_eq!(title1, "Movie 1");
+            assert_eq!(title2, "Movie 2");
+            assert_eq!(similarity, 1.0 / 3.0);
+        } else {
+            panic!("No similar movies found.");
+        }
+    }
+
+    #[test]
+    fn test_get_most_dissimilar() {
+        let mut graph = Graph::new();
+        graph.add_movie("Movie 1", vec!["Actor 1".to_string(), "Actor 2".to_string()]);
+        graph.add_movie("Movie 2", vec!["Actor 2".to_string(), "Actor 3".to_string()]);
+        graph.add_movie("Movie 3", vec!["Actor 4".to_string(), "Actor 5".to_string()]);
+
+        if let Some((title1, title2, dissimilarity)) = graph.get_most_dissimilar() {
+            assert_eq!(title1, "Movie 1");
+            assert_eq!(title2, "Movie 3");
+            assert_eq!(dissimilarity, 1.0);
+        } else {
+            panic!("No dissimilar movies found.");
+        }
+    }
+}

@@ -9,5 +9,5 @@
 - proj Folder: contains src Folder, Cargo.toml, Cargo.lock, csv file
 - src Folder: contains file_io.rs, main.rs, similarity.rs
 - file_io.rs: contains code that reads the csv file and constructs a graph representation of the data.
-- main.rs: contains code to analyze the data through graph-based approach and builds the graph from it
+- main.rs: contains code to analyze and build the graph from the data through graph-based approach
 - similarity.rs: contains code that analyzes the similarity and dissimilarity of sets
