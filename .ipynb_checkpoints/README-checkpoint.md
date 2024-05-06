@@ -1,6 +1,6 @@
 # DS210 Final Project
 
-# Movies and Cast Graph Analysis - Implementing Friends of my Friends for Most Similar and Most Dissimilar Sets of Connections
+## Movies and Actors Graph Analysis - Implementing Friends of my Friends for Most Similar and Most Dissimilar Sets of Connections
 
 
 ## Navigating the Repository:
